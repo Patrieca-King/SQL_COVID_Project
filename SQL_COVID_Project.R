@@ -11,7 +11,7 @@ COVID_Deaths1 <- sqldf("SELECT * FROM COVID_Deaths WHERE continent <> ''")
 COVID_Vaccinations1 <- sqldf("SELECT * FROM COVID_Vaccinations WHERE continent <> ''")
 
 
-StartingData <- sqldf("SELECT Location, date, total_cases, new_cases, total_deaths, population
+StartingData <- sqldf("SELECT location, date, total_cases, new_cases, total_deaths, population
                       FROM COVID_Deaths1
                       ORDER BY 1,2 ")
 
@@ -23,21 +23,21 @@ NationalDeathRates <- sqldf("SELECT location, population, date, total_cases, tot
 
 #Compare the above in the US
 
-USDeathRate <- sqldf("SELECT ;ocation, date, total_cases, total_deaths, (total_deaths/total_cases)*100 AS death_rate
+USDeathRate <- sqldf("SELECT location, date, total_cases, total_deaths, (total_deaths/total_cases)*100 AS death_rate
                       FROM COVID_Deaths1
                       WHERE Location LIKE '%States'
                       ORDER BY 1,2")
 
 # What percentage of the US population got infected with COVID?
 
-USInfectionRate <- sqldf("SELECT Location, date, population, total_cases, (total_cases/population)*100 AS PopulationPercentage
+USInfectionRate <- sqldf("SELECT location, date, population, total_cases, (total_cases/population)*100 AS PopulationPercentage
                       FROM COVID_Deaths1
                       WHERE Location LIKE '%States'
                       ORDER BY 1,2")
 
 # Compare highest infection rates across countries
 
-MaxInfectionRates <- sqldf("SELECT Location, population, MAX(total_cases) AS HighestInfectionCount, MAX((total_cases/population))*100 AS PopulationInfectionPercent
+MaxInfectionRates <- sqldf("SELECT location, population, MAX(total_cases) AS HighestInfectionCount, MAX((total_cases/population))*100 AS PopulationInfectionPercent
                            FROM COVID_Deaths1
                            GROUP BY Location, population
                            ORDER BY PopulationInfectionPercent DESC")
