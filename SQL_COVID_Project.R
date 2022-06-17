@@ -105,3 +105,15 @@ VaccinationRate <- sqldf("WITH VacRate (continent, location, date, population, n
                       )
                          SELECT *, (rolling_vaccinations/population)*100 AS vaccination_rate
                          FROM VacRate")
+
+# Write files to computer for visualization
+
+library(writexl)
+
+write_xlsx(OverallGlobalDeathRate, "/Users/patriecaking/Documents/DA Portfolio/Ready for Visualization/SQL COVID project\\GlobalDeathRate.xlsx")
+
+write_xlsx(HighestDeathRatesbyContinent,"/Users/patriecaking/Documents/DA Portfolio/Ready for Visualization/SQL COVID project\\HighestDeathRatesbyContinent.xlsx")
+
+write_xlsx(MaxInfectionRates, "/Users/patriecaking/Documents/DA Portfolio/Ready for Visualization/SQL COVID project\\InfectionRatesbyCountry.xlsx")
+
+write_xlsx(VaccinationRate, "/Users/patriecaking/Documents/DA Portfolio/Ready for Visualization/SQL COVID project\\GlobalVaccinationRate.xlsx")
